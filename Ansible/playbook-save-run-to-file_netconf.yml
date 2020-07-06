@@ -1,0 +1,25 @@
+---
+
+- name: Save running configuration as a pretty XML to a file
+  hosts: all
+  gather_facts: no
+
+  tasks:
+
+    - set_fact:
+        ansible_connection: netconf
+        ansible_network_os: default
+
+    - name: Backup the running configuration in XML
+      netconf_config:
+        hostkey_verify: no
+        backup: yes
+        backup_options:
+           dir_path: backup/
+           filename: backup_running-config_{{ inventory_hostname }}.txt
+
+    - name: Make XML pretty
+      xml:
+        input_type: xml
+        path: backup/backup_running-config_{{ inventory_hostname }}.txt
+        pretty_print: yes

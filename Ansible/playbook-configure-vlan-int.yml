@@ -1,0 +1,12 @@
+---
+
+- name: configure Vlan interface
+  hosts: all
+  gather_facts: no
+
+  tasks:
+        - ios_config:
+             lines:
+               - description configured via ios_config module
+               - ip address 192.168.100.1 255.255.255.0
+             before: interface Vlan10

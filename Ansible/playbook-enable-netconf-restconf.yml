@@ -1,0 +1,13 @@
+---
+
+- name: enable NETCONF and RESTCONF
+  hosts: all
+  gather_facts: no
+
+  tasks:
+        - ios_config:
+             lines:
+               - netconf-yang
+               - restconf
+
+  

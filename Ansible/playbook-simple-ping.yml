@@ -1,0 +1,8 @@
+---
+
+- name: simple ping
+  hosts: all
+  gather_facts: no
+
+  tasks:
+        - ping:

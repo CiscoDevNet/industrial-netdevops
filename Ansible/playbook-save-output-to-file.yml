@@ -1,0 +1,11 @@
+---
+
+- name: saving CLI output to a file
+  hosts: all
+  gather_facts: no
+
+  tasks:
+        - ios_command:
+             commands: "show ip route"
+          register: output
+        - copy: content="{{ output.stdout }}" dest=file.txt

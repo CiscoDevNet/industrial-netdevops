@@ -1,0 +1,33 @@
+---
+
+- name: Configure VLAN Interface with NETCONF
+  hosts: all
+  gather_facts: no
+
+  tasks:
+
+    - set_fact:
+        ansible_connection: netconf
+        ansible_network_os: default
+
+    - name: Configure VLAN Interface with NETCONF
+      netconf_config:
+        hostkey_verify: False
+        content: |
+            <config>
+              <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+                <interface>
+                  <Vlan>
+                   <name>90</name>
+                    <ip>
+                     <address>
+                      <primary>
+                       <address>192.168.20.1</address>
+                       <mask>255.255.255.0</mask>
+                      </primary>
+                     </address>
+                   </ip>
+                  </Vlan>
+                </interface>
+              </native>
+            </config>

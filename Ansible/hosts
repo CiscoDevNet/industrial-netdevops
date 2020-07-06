@@ -1,0 +1,11 @@
+#Example Ansible hosts File
+#ansible_user -> IOS username
+#[cell] -> name of the group
+
+[all:vars]
+ansible_user=developer
+ansible_network_os=ios
+ansible_connection=network_cli
+
+[cell]
+10.10.20.48

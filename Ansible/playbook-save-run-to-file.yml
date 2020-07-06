@@ -1,0 +1,11 @@
+---
+
+- name: Create a backup on your computer of your IOS running-configuration
+  hosts: all
+  gather_facts: no
+
+  tasks:
+        - ios_config:
+             backup: yes
+#             backup_options:
+#                dir_path: 
