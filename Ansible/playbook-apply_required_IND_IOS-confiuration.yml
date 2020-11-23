@@ -1,0 +1,31 @@
+---
+
+# Required IOs Configuration for IND 1.8
+# https://www.cisco.com/c/en/us/td/docs/switches/ind/release_notes/rn-iot-ind-1-8.html#pgfId-315890
+# Please check the documentation for further modifications
+# You may also check out working with variables
+
+
+- name: IND required IOS-Configuration 
+  hosts: all
+  gather_facts: no
+
+  tasks:
+        - ios_config:
+             lines:
+               - snmp-server community mycommunity ro
+               - snmp-server group mygroup v3 noauth
+               - snmp-server user myusername mygroup v3
+               - username myusername privilege 15 password 0 mypassword
+               - aaa new-model
+               - aaa authentication login default local
+               - aaa authorization exec default local
+               - ip ssh version 2
+               - ip http server
+               - ip http secure-server
+               - ip http authentication aaa login-authentication default
+               - line vty 0 15
+               - login authentication default
+               - transport input all
+               - transport output all
+  

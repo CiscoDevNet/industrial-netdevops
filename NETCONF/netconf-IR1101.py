@@ -55,7 +55,7 @@ def change_interface4(v):
         '''
     config_dict = xmltodict.parse(config)
 
-    if v == int(1):
+    if v == 1:
         config_dict["config"]["interfaces"]["interface"]["enabled"] = "true"
         config = xmltodict.unparse(config_dict)
 

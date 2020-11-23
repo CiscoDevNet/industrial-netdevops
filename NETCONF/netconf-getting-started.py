@@ -4,20 +4,17 @@
 # Flo Pachinger / flopach, Cisco Systems, Dec 2019
 # Apache License 2.0
 #
-from ncclient import manager
+from ncclient import manager, xml_
 import xmltodict
 import xml.dom.minidom
-import lxml.etree as ET
 
 #Input here the connection parameters for the IOS XE device
 #Do not forget to enable NETCONF: device(config)#netconf-yang
-m = manager.connect(host="10.10.20.48",
+m = manager.connect(host="172.19.88.15",
                     port=830,
-                    username="developer",
-                    password="C1sco12345",
+                    username="cisco",
+                    password="Cisco123!",
                     hostkey_verify=False)
-
-print("Connected.")
 
 # get the running config in XML of the device
 def get_running_config():
@@ -37,7 +34,7 @@ def get_hostname():
 # this should be faster
 def get_hostname_filter():
     filter = '''
-    <filter>
+    <filter xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
           <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
               <hostname></hostname>
               <version></version>
@@ -54,16 +51,14 @@ def get_capabilities():
     for c in m.server_capabilities:
         print(c)
 
-# change interface GigabitEthernet3
+# change interface 1/10 of the device (IE3400)
 # 0 --> disable | 1 --> enable
 def change_interface(user_selection):
-  int_status = user_selection
-
   config = '''
-      <config>
-            <interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces">
+      <config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+      <interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces">
               <interface>
-                  <name>GigabitEthernet3</name>
+                  <name>GigabitEthernet1/10</name>
                   <enabled>false</enabled>
               </interface>
             </interfaces>
@@ -71,18 +66,18 @@ def change_interface(user_selection):
       '''
   config_dict = xmltodict.parse(config)
 
-  if int_status == int(1):
+  if user_selection == 1:
       config_dict["config"]["interfaces"]["interface"]["enabled"] = "true"
       config = xmltodict.unparse(config_dict)
 
   netconf_reply = m.edit_config(target='running', config=config)
   print("Did it work? {}".format(netconf_reply.ok))
 
-# copy run start
+# copy running-configuration startup-configuration
 def save_running_config():
     rpc_body = '''<cisco-ia:save-config xmlns:cisco-ia="http://cisco.com/yang/cisco-ia"/>'''
-    netconf_reply = m.dispatch(ET.fromstring(rpc_body)).xml 
-    print("Did it work? {}".format(netconf_reply))
+    netconf_reply = m.dispatch(xml_.to_ele(rpc_body))
+    print("Did it work? {}".format(netconf_reply.ok))
 
 if __name__ == "__main__":
     while True:
@@ -92,8 +87,8 @@ if __name__ == "__main__":
               2: Get hostname and IOS version (whole config)
               3: Get hostname and IOS version (filter used)
               4: Get all the YANG models from the device
-              5: Enable GigabitEthernet3
-              6: Disable GigabitEthernet3
+              5: Enable Interface 1/10
+              6: Disable Interface 1/10
               7: Save the running-configuration
               """)
         var = input("Enter: ")

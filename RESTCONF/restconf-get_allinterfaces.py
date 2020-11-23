@@ -9,10 +9,10 @@ import json
 
 #Input here the connection parameters for the IOS XE device
 #Do not forget to enable RESTCONF: device(config)#restconf
-host = '172.19.8.1'
+host = '172.19.88.15'
 port = 443
 username = 'cisco'
-password = 'cisco'
+password = 'Cisco123!'
 
 def get_allinterfaces():
     url = "https://{h}:{p}/restconf/data/ietf-interfaces:interfaces".format(h=host, p=port)

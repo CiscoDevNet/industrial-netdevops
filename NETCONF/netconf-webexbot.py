@@ -34,7 +34,7 @@ def getinfo(incoming_msg):
 # The bot returns all interfaces of the device
 def getallinterfaces(incoming_msg):
     filter = '''
-    <filter>
+    <filter xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
           <interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces"></interfaces>
       </filter>
     '''
@@ -49,7 +49,7 @@ def getallinterfaces(incoming_msg):
 # depends on the user input
 def change_interface4(incoming_msg):
     config = '''
-        <config>
+        <config  xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
               <interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces">
                 <interface>
                     <name>FastEthernet0/0/4</name>

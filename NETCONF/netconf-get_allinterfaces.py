@@ -19,7 +19,7 @@ m = manager.connect(host="<ip of the device>",
 # Get the status of all interfaces of the device
 def get_allinterfaces():
     filter = '''
-    <filter>
+    <filter xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
           <interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces">
           </interfaces>
       </filter>

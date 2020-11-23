@@ -1,6 +1,6 @@
 # Industrial NetDevOps: Getting Started with Programmability & APIs on Cisco IoT Hardware
 
-> **Industrial NetDevOps brings the culture, tools, technical methods and best practices from DevOps to Industrial Networks.**
+> **Industrial NetDevOps is the combination of the tools and best practices from DevOps with network engineering and operations in industrial networks.**
 
 Instead of using SNMP and CLI, you configure, manage and monitor industrial network devices via **standardized network device APIs and software automation tools**. Industrial NetDevOps workflows use Open Source, standards and Python scripts alongside commercial devices and tools to deliver flexible and fast-responsive industrial networks.
 
@@ -133,14 +133,15 @@ device(config)#restconf
 
 ## Versioning
 
-**06/2020**: Added RESTCONF, Ansible and Industrial NetDevOps Story
+**11/2020**: Updated NETCONF scripts and License
 
+**06/2020**: Added RESTCONF, Ansible and Industrial NetDevOps Story
 
 **12/2019**: Added 3 inital scripts
 
 ## License
 
-This project is licensed under the Cisco Sample Code License, Version 1.1 - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the Apache License 2.0 - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Further Links
 
