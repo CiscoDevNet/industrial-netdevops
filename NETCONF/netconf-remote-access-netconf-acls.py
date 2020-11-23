@@ -19,7 +19,7 @@ def get_running_config():
 # Create the ACL
 def create_remoteaccess():
     config = '''
-      <config>
+      <config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
             <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
                 <ip>
                     <access-list>
@@ -78,7 +78,7 @@ def create_remoteaccess():
 # Add or delete the ACL group to the Northbound-Interface
 def change_remoteaccess():
     config = '''
-      <config>
+      <config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
             <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
                 <interface>
                     <GigabitEthernet>
