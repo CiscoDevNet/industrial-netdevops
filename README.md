@@ -1,3 +1,5 @@
+[![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/industrial-netdevops)
+
 # Industrial NetDevOps: Getting Started with Programmability & APIs on Cisco IoT Hardware
 
 > **Industrial NetDevOps is the combination of the tools and best practices from DevOps with network engineering and operations in industrial networks.**
